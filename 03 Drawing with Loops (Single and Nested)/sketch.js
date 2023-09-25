@@ -7,6 +7,31 @@
 let numSegments = 30;
 let segmentHeight;
 let currentBackground = 0; //state variable (0-2)
+const GRID_SPACING = 15;   //CAP -> const
+
+function grid(){
+  //use a nested loop to draw a grid on the screen
+  for (let x = 0; x < width; x += GRID_SPACING){
+    for(let y = 0; y < height; y += GRID_SPACING){
+      //print(x + ", "+ y);
+      if(dist(x,y,mouseX,mouseY) < 50){
+        fill(255,0,0);
+      }
+      else{
+        fill(0);
+      }
+      circle(x,y,10);
+      //test1
+      //line(x,y,mouseX,mouseY);
+    }
+  }
+}
+
+function draw() {
+  selectBackground();
+  grid();
+}
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -33,9 +58,10 @@ function selectBackground(){
   else background(60,240,120);
 }
 
-function draw() {
-  selectBackground();
-}
+
+
+
+
 
 function mousePressed(){
   print(mouseButton);
