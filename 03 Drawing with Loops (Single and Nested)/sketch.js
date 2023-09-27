@@ -28,8 +28,8 @@ function grid(){
 }
 
 function draw() {
-  selectBackground();
-  grid();
+  // selectBackground();
+  // grid();
 }
 
 
