@@ -6,6 +6,7 @@
 // Global Variables
 let x, y, rHeight, rWidth;  //(x,y) center referenced
 let rLeft, rRight, rTop, rBottom; //edge positions
+let mouseOver = false; // are we hovering over the rect?
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -24,6 +25,19 @@ function drawRectangle(){
   //renders rectangle and checks for mouse interactions
   updateEdgePositions();
   print(rLeft + " " + rRight + " " + rTop + " " + rBottom);
+
+  //are we in the region?
+  if(mouseX>rLeft && mouseX<rRight && mouseY>rTop && mouseY <rBottom){
+    fill(70,230,130);
+    mouseOver = true;
+  }
+  else{
+    fill(30,70,170);
+    mouseOver = false;
+  }
+
+  //draw the rectangle
+  rect(x,y,rWidth,rHeight);
 }
 
 function draw() {
