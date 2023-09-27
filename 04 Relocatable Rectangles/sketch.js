@@ -7,6 +7,8 @@
 let x, y, rHeight, rWidth;  //(x,y) center referenced
 let rLeft, rRight, rTop, rBottom; //edge positions
 let mouseOver = false; // are we hovering over the rect?
+let pickedUp = false; //are we currently moving the object?
+let offX, offY; //so object doesn't snap to mouse
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -36,9 +38,27 @@ function drawRectangle(){
     mouseOver = false;
   }
 
+  if(pickedUp){
+    x = mouseX - offX;
+    y = mouseY - offY; 
+  }
+
   //draw the rectangle
   rect(x,y,rWidth,rHeight);
 }
+
+function mousePressed(){
+  if(mouseOver){
+    pickedUp = true;
+    offX = mouseX - x;
+    offY = mouseY - y;
+  }
+}
+
+function mouseReleased(){
+  pickedUp = false;
+}
+
 
 function draw() {
   background(220);
