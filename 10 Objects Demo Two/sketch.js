@@ -3,12 +3,23 @@
 // October 13, 2023
 // Looking at objects that can interact with each other
 
+// Global Variables
+let points = [];
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
-  background(220);
+  background(255);
+  for(let p of points){
+    p.display();
+  }
+
+}
+
+function mouseClicked(){
+  points.push(new MiniPoint(mouseX,mouseY));
 }
 
 class MiniPoint{
