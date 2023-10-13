@@ -73,6 +73,14 @@ class MiniPoint {
   display() {
     fill(this.c);
     noStroke();
+    //modify size based on mouse proximity
+    let d = dist(this.x,this.y,mouseX,mouseY);
+    if(d < reach){
+      this.s = map(d, 0, reach, 20, 50);
+    }
+    else{
+      this.s = 20;
+    }
     circle(this.x, this.y, this.s);
   }
 }
