@@ -13,6 +13,7 @@ function setup() {
 function draw() {
   background(255);
   for(let p of points){
+    p.move();
     p.display();
   }
 
@@ -32,6 +33,22 @@ class MiniPoint{
   }
 
   //class functions
+  move(){
+    let xSpeed = noise(this.xTime); //0-1    //-5 to 5
+    xSpeed = map(xSpeed,0,1,-this.maxSpeed, this.maxSpeed);
+    let ySpeed = noise(this.yTime);
+    ySpeed = map(ySpeed,0,1,-this.maxSpeed,this.maxSpeed);
+    this.x += xSpeed;   this.y += ySpeed;
+    this.xTime += this.timeShift;    
+    this.yTime+=this.timeShift;
+
+    //Wrap around code 
+    if(this.x < 0) this.x += width;
+    if(this.x > width) this.x -= width;
+    if(this.y < 0) this.y += height;
+    if(this.y > height) this.y -= height;
+  }
+
   display(){
     fill(this.c);
     noStroke();
