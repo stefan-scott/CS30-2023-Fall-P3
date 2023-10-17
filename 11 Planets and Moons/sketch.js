@@ -15,7 +15,14 @@ function draw() {
 }
 
 function mouseClicked(){
-  myPlanet.createMoon();
+  if(keyIsPressed && keyCode === SHIFT){
+    //overwrite an object?
+    myPlanet = new Planet(mouseX, mouseY);
+  }
+  else{
+    myPlanet.createMoon();
+  }
+  
 }
 
 class Planet{
