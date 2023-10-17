@@ -14,6 +14,10 @@ function draw() {
   myPlanet.display();
 }
 
+function mouseClicked(){
+  myPlanet.createMoon();
+}
+
 class Planet{
   constructor(x,y){
     this.x = x;     this.y = y;
@@ -26,5 +30,18 @@ class Planet{
 }
 
 class Moon{
+  constructor(x,y){
+    this.x = x;  this.y = y;
+    this.steps = 10;  this.speed = 5;
+  }
+  update(){
+    this.x += this.speed;     //MOVEMENT
+    this.steps--;  //-=1
+    if(this.steps === 0){
+      this.steps = 20;
+      this.speed *= -1;
+    }                         //DISPLAY
+    circle(this.x, this.y, 30);
+  }
 
 }
