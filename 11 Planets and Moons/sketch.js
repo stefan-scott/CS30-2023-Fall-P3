@@ -26,6 +26,12 @@ class Planet{
   }
   display(){
     circle(this.x, this.y, this.s);
+    for(let m of this.moons){
+      m.update();
+    }
+  }
+  createMoon(){
+    this.moons.push(new Moon(this.x, this.y));
   }
 }
 
