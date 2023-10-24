@@ -50,9 +50,9 @@ function draw() {
   //Combinations of Transformations
   push();
   rotate(radians(45));
-  scale(2);
-  translate(50, 50);
-  face(200, 200);
+  translate(100, 0);
+  rotate(radians(-22.5));
+  face(0, 0);
   pop();
 
 
