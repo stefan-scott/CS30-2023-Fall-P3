@@ -10,13 +10,19 @@ function setup() {
 }
 
 function mousePressed(){
-  movers.push(new Mover(mouseX,mouseY));
+  //movers.push(new Mover(mouseX,mouseY));
 }
 
 function draw() {
   background(220);
-  for(let m of movers){
+  movers.push(new Mover(mouseX,mouseY));
+  for(let i=0; i<movers.length; i++){
+    let m = movers[i];
     m.move();   m.display();
+    if(!m.alive){
+      movers.splice(i,1);
+      i--;
+    }
   }
 }
 
@@ -24,9 +30,20 @@ class Mover{
   //constrcutor and class properties
   constructor(x,y){
     this.position = createVector(x,y);  this.s = 20;
+    this.velocity = createVector(random(-3,3), random(-5,-3));
+    this.gravity = createVector(0,0.1);
+    this.lifetime = Math.floor(random(100,200));
+    this.alive = true;
   }
   //class methods
   move(){
+    //Apply forces first (modify our velocity)
+    this.velocity.add(this.gravity);
+    //Then apply our velocity to position
+    this.position.add(this.velocity);
+    //↑ is a MUTATOR method
+    this.lifetime --;
+    if(this.lifetime === 0) this.alive = false;
   }
 
   display(){
