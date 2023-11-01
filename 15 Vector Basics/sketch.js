@@ -33,7 +33,7 @@ class Mover{
     this.velocity = createVector(random(-3,3), random(-5,-3));
     this.gravity = createVector(0,0.1);
     this.lifetime = Math.floor(random(100,200));
-    this.alive = true;
+    this.alive = true;  this.c = color(0, 100, random(100,255),100);
   }
   //class methods
   move(){
@@ -48,6 +48,8 @@ class Mover{
 
   display(){
     push();
+    fill(this.c);
+    noStroke();
     translate(this.position.x, this.position.y);
     circle(0, 0, this.s);
     pop();
