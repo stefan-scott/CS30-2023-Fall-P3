@@ -4,13 +4,13 @@
 // A first foray into working with 2D arrays
 
 let grid =
-[[50,  100,  150,  200,  255],
+[[255,  0,  255,   0,  255],
  [0,   0,    0,    255,  0  ],
- [100, 100,  0,    100,  0  ],
- [255, 200,  150,  100,  50 ]];
+ [255, 255,  0,    255,  0  ],
+ [255, 0,    0,    255,  0 ]];
 
 const NUM_ROWS = 4;  const NUM_COLS = 5;
-let rectWidth, rectHeight;
+let rectWidth, rectHeight, row, col;
 
 function setup() {
   rectWidth = 50;  rectHeight = 50;
@@ -18,12 +18,19 @@ function setup() {
 }
 
 function draw() {
+  row = getCurrentY();   col = getCurrentX();
   background(220);
   renderGrid();
-  //update the array 2x per second
-  if(frameCount%5===0){
-    grid[int(random(NUM_ROWS))][int(random(NUM_COLS))]=random(255);
-  }
+  print(col,row); //prints x,y
+}
+
+function getCurrentX(){ //determine current column mouse is in, and return
+  let constrainMouseX = constrain(mouseX, 0, width-1);
+  return floor(constrainMouseX/rectWidth);  
+}
+function getCurrentY(){ //determine current row mouse is in, and return
+  let constrainMouseY = constrain(mouseY, 0, height-1);
+  return floor(constrainMouseY/rectHeight);
 }
 
 function renderGrid(){
