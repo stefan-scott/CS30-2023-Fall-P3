@@ -19,4 +19,23 @@ function setup() {
 
 function draw() {
   background(220);
+  renderGrid();
+  //update the array 2x per second
+  if(frameCount%5===0){
+    grid[int(random(NUM_ROWS))][int(random(NUM_COLS))]=random(255);
+  }
+}
+
+function renderGrid(){
+  //creates a 2D grid of squares using information from our
+  //2D array for the corresponding fill values
+  for(let x = 0; x < NUM_COLS; x++){
+    for(let y = 0; y < NUM_ROWS; y++){
+      let fillValue = grid[y][x];
+      fill(fillValue);
+      //x:    0,   1,   2,  3,   4
+      //posx  0   50, 100, 150,200   expression? x→posx
+      rect(x*rectWidth, y*rectHeight, rectWidth, rectHeight);
+    }
+  }
 }
