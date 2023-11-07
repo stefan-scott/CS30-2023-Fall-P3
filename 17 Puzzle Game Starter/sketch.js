@@ -22,6 +22,27 @@ function draw() {
   background(220);
   renderGrid();
   print(col,row); //prints x,y
+  fill(255,0,0);
+  circle(mouseX,mouseY,5);
+}
+
+function mousePressed(){
+  //when the mouse is clicked, flip the value at the current
+  //col,row + also flip 4 cardinal neighbours (North, S, E, W)
+  
+  // flip @ mouseposition
+  flip(col,row);
+
+  // flip the 4 neighbours ↑↓→←
+  if(col < NUM_COLS-1) flip(col+1, row); //RIGHT NEIGHBOUR
+  if(row > 0) flip(col,row-1); //UP NEIGHBOUR
+}
+
+function flip(col, row){
+  //at a given x,y, flip the value in the 2D array
+  //0→255   255→0
+  if(grid[row][col] === 0) grid[row][col] = 255;
+  else grid[row][col] = 0;
 }
 
 function getCurrentX(){ //determine current column mouse is in, and return
