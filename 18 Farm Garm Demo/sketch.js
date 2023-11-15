@@ -29,6 +29,23 @@ function setup() {
   level[playerY][playerX] = 2; //add player to level
 }
 
+function renderBoard(){
+  //interpret the data in our 2D array, and place images
+  for(let y = 0; y < ROWS; y++){
+    for(let x = 0; x< COLUMNS; x++){
+      let currentItem = level[y][x]; //0, 1, 2
+      image(tiles[currentItem],x*TILE_SIZE,y*TILE_SIZE);
+    }
+  }
+}
+
+function swap(x1,y1,x2,y2){
+  //have 2 items in the 2D array switch places
+  let temp = level[y1][x1];
+  level[y1][x1] = level[y2][x2];
+  level[y2][x2] = temp;
+}
+
 function draw() {
-  background(220);
+  renderBoard();
 }
