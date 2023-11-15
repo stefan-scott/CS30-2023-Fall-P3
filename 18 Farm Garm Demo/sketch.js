@@ -46,6 +46,41 @@ function swap(x1,y1,x2,y2){
   level[y2][x2] = temp;
 }
 
+function keyPressed(){
+  //check for arrow key press, and move/push as needed
+  if(keyCode===UP_ARROW){
+    //First, check if the upper nieghbour is a blank
+    if(level[playerY-1][playerX]===0){
+      swap(playerX, playerY, playerX, playerY-1);
+      playerY--;
+    }
+    //next, check for a chicken
+    else if(level[playerY-1][playerX]===1){
+      //then, see if there is room to move it:
+      if(playerY > 1 && level[playerY-2][playerX]===0){
+        swap(playerX,playerY-2,playerX,playerY-1); //push
+        swap(playerX,playerY, playerX,playerY-1);
+        playerY--;
+      }
+    }
+  
+  }
+  if(keyCode===DOWN_ARROW){
+    //SHOULD BE ERROR CHECKING Before swapping...
+    swap(playerX,playerY,playerX,playerY+1);
+    playerY++;
+  }
+  if(keyCode===LEFT_ARROW){
+    swap(playerX, playerY,playerX-1,playerY);
+    playerX--;
+  }
+  if(keyCode===RIGHT_ARROW){
+    swap(playerX,playerY,playerX+1,playerY);
+    playerX++;
+  }
+
+}
+
 function draw() {
   renderBoard();
 }
