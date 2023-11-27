@@ -6,6 +6,8 @@
 let ball;  
 let totalBounces = 0;
 let bounceSound, music;
+let start = false;
+
 // localStorage.getItem("bounces") === null
 // localStorage.setItem("bounces", 0)
 
@@ -24,15 +26,29 @@ function setup() {
   else{
     totalBounces = int(localStorage.getItem("bounces"));
   }
+
 }
 
 function draw() {
   background(220);
-  ball.move();
+  
+  if(start===false){
+    textSize(15);  textAlign(CENTER);
+    text("Click to Begin", width/2, height/2);
+    if(mouseIsPressed){
+      start = true;
+      music.setVolume(0.3);  //0-1
+      music.loop();
+    }
+  }
+  else{
+    ball.move();
   ball.display();
   //display the total number of bounces
   textSize(30);  textAlign(CENTER);
   text(totalBounces, width/2,height/2);
+  }
+  
 }
 
 class Ball{ //a ball that bounces on the canvas edges
@@ -50,11 +66,13 @@ class Ball{ //a ball that bounces on the canvas edges
       this.vel.x *= -1;
       totalBounces += 1;
       localStorage.setItem("bounces", totalBounces);
+      bounceSound.play();
     }
     if(this.pos.y<0 || this.pos.y>height){
       this.vel.y *= -1;
       totalBounces +=1;
       localStorage.setItem("bounces", totalBounces);
+      bounceSound.play();
     }
   }
 }
