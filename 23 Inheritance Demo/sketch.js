@@ -9,6 +9,9 @@ function setup(){
   for(let i = 0; i < 10; i++){
     objects.push(new AnimatedObject(random(width),random(height)));
   }
+  for(let i = 0; i < 10; i++){
+    objects.push(new CircleObject(random(width),random(height),random(20,40)));
+  }
 }
 
 function draw(){
@@ -34,5 +37,17 @@ class AnimatedObject {
   display(){
     strokeWeight(4);
     point(this.x,this.y);
+  }
+}
+
+class CircleObject extends AnimatedObject{
+  constructor(x, y, d){
+    super(x, y);
+    this.size = d;
+  }
+
+  display(){
+    strokeWeight(2);
+    circle(this.x, this.y, this.size);
   }
 }
