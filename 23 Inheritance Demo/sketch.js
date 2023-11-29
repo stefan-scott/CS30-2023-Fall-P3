@@ -12,6 +12,9 @@ function setup(){
   for(let i = 0; i < 10; i++){
     objects.push(new CircleObject(random(width),random(height),random(20,40)));
   }
+  for(let i = 0; i < 10; i++){
+    objects.push(new LineObject());
+  }
 }
 
 function draw(){
@@ -21,6 +24,9 @@ function draw(){
     o.display();
   }
 }
+
+
+
 
 //"parent" or "super" class
 class AnimatedObject {
@@ -49,5 +55,27 @@ class CircleObject extends AnimatedObject{
   display(){
     strokeWeight(2);
     circle(this.x, this.y, this.size);
+  }
+}
+
+//child class #2
+class LineObject extends AnimatedObject{
+  constructor(){
+    super(random(width), random(height));
+  }
+
+  move(){
+    super.move();  //copies in the Wiggle Code
+    this.x += 5;
+    if(this.x > width) this.x = 0;
+  }
+
+  display(){ //overriding the parent's display() method
+    if(mouseIsPressed){
+      strokeWeight(10);
+    }
+    else strokeWeight(2);
+
+    line(this.x, this.y, this.x + 15, this.y);
   }
 }
